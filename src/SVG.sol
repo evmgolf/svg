@@ -22,14 +22,7 @@ library SVG {
   }
 
   function svg(bytes memory body, uint width, uint height) internal pure returns (bytes memory) {
-    bytes[] memory keys = new bytes[](2);
-    keys[0] = "xmlns";
-    keys[1] = "viewBox";
-    bytes[] memory values = new bytes[](2);
-    values[0] = "http://www.w3.org/2000/svg";
-    values[1] = bytes.concat("0 0 ", width.decimal(), " ", height.decimal());
-    // return bytes.concat("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>", tag("svg", body, keys, values));
-    return tag("svg", body, keys, values);
+    return bytes.concat("<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 ", width.decimal(), " ", height.decimal(), "\">", body, "</svg>");
   }
 
   function uriBase64(bytes memory _text) internal pure returns (bytes memory) {
@@ -37,12 +30,6 @@ library SVG {
   }
 
   function text(bytes memory body, uint x, uint y) internal pure returns (bytes memory) {
-    bytes[] memory keys = new bytes[](2);
-    bytes[] memory values = new bytes[](2);
-    keys[0] = "x";
-    values[0] = x.decimal();
-    keys[1] = "y";
-    values[1] = y.decimal();
-    return tag("text", body, keys, values);
+    return bytes.concat("<text x=\"", x.decimal(), "\" y=\"", y.decimal(), "\">", body, "</text>");
   }
 }
