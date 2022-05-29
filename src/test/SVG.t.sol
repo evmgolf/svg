@@ -28,4 +28,26 @@ contract SVGTest is Test {
   function testOutputsSomethingText(bytes calldata body, uint x, uint y) public {
     assertGt(SVG.text(body, x, y).length, 0);
   }
+
+  function testGasEmptyTag() public pure {
+    SVG.tag("", "");
+  }
+
+  function testGasEmptyTagWithAttributes() public pure {
+    bytes[] memory keys;
+    bytes[] memory values;
+    SVG.tag("", "", keys, values);
+  }
+
+  function testGasEmptySVG() public pure {
+    SVG.svg("", 0, 0);
+  }
+
+  function testGasEmptyURIBase64() public pure {
+    SVG.uriBase64("");
+  }
+
+  function testGasEmptyText() public pure {
+    SVG.text("", 0, 0);
+  }
 }
